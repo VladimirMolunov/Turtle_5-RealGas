@@ -35,7 +35,9 @@ maxspeed = 10
 dd = 10 #Параметр для рисования границы
 
 def drawborder():
+    """Рисование границы"""
     turtle.color('black')
+    turtle.speed(300)
     turtle.goto(x_border + dd, y_border + dd)
     turtle.pendown()
     turtle.goto(x_border + dd, -1 * y_border - dd)
@@ -44,6 +46,7 @@ def drawborder():
     turtle.goto(x_border + dd, y_border + dd)
     turtle.penup()
     turtle.hideturtle()
+    turtle.speed(50)
 
 drawborder()
 
@@ -59,12 +62,13 @@ def body():
 
     global ax, ay, vx, vy, x, y, dist
 
-    gravity_power = 7
-    gravity_coefficient = 30
-    push_power = 15
-    push_coefficient = 10
-    dt = 1
-    gap = 0.1
+    gravity_power = 8
+    gravity_coefficient = 10
+    push_power = 3
+    push_coefficient = 17
+    dt = 0.5
+    gap = 5
+    norm = 5
 
     atan = 0
 
@@ -85,6 +89,8 @@ def body():
                 elif ((y[j] - y[i]) < 0):
                     atan = 3 * np.pi / 2
 
+            dist[i][j] = dist[i][j] / norm
+
             if ((dist[i][j]) == 0):
                 (dist[i][j]) = gap
 
@@ -94,7 +100,7 @@ def body():
                 ax[i] -= push_coefficient/np.power((dist[i][j]), push_power) * np.cos(atan)
                 ay[i] -= push_coefficient/np.power((dist[i][j]), push_power) * np.sin(atan)
 
-        moveturtles(i, x[i],y[i])
+
 
         vx[i] += ax[i] * dt
         vy[i] += ay[i] * dt
@@ -108,6 +114,8 @@ def body():
         else:
             vy[i] = -1 * vy[i]
             y[i] += vy[i] * dt
+
+        moveturtles(i, x[i], y[i])
 
 for q in range (0, steps, 1):
     body()
