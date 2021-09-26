@@ -30,8 +30,8 @@ ax = []
 ay = []
 
 x_border = 350
-y_border = 250
-maxspeed = 10
+y_border = 260
+maxspeed = 50
 dd = 10 #Параметр для рисования границы
 
 def drawborder():
@@ -65,8 +65,8 @@ def body():
     gravity_power = 8
     gravity_coefficient = 10
     push_power = 3
-    push_coefficient = 17
-    dt = 0.5
+    push_coefficient = 170
+    dt = 0.2
     gap = 5
     norm = 5
 
@@ -91,7 +91,7 @@ def body():
 
             dist[i][j] = dist[i][j] / norm
 
-            if ((dist[i][j]) == 0):
+            if ((dist[i][j]) < gap):
                 (dist[i][j]) = gap
 
             if (i != j):
