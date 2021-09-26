@@ -9,7 +9,7 @@ turtle.penup()
 screen=Screen()
 
 number = 50 # Количество черепах
-steps = 100 # Количество шагов (за 1 шаг все черепахи перемещаются 1 раз)
+steps = 200 # Количество шагов (за 1 шаг все черепахи перемещаются 1 раз)
 
 pool = [turtle.Turtle(shape='circle') for r in range(0, number, 1)] # Задание набора черепах
 
@@ -31,13 +31,13 @@ ay = []
 
 x_border = 350
 y_border = 250
-maxspeed = 30
+maxspeed = 10
 
 for i in range(0, number, 1):
     x.append(randint(-1 * x_border, x_border))
     y.append(randint(-1 * y_border, y_border))
-    vx.append(randint(1,maxspeed))
-    vy.append(randint(1,maxspeed))
+    vx.append(randint(-1 * maxspeed, maxspeed))
+    vy.append(randint(-1 * maxspeed, maxspeed))
     ax.append(0)
     ay.append(0)
 
@@ -45,9 +45,9 @@ def body():
 
     global ax, ay, vx, vy, x, y, dist
 
-    gravity_power = 2
-    gravity_coefficient = 10
-    push_power = 3
+    gravity_power = 7
+    gravity_coefficient = 30
+    push_power = 15
     push_coefficient = 10
     dt = 1
     gap = 0.1
@@ -80,8 +80,7 @@ def body():
                 ax[i] -= push_coefficient/np.power((dist[i][j]), push_power) * np.cos(atan)
                 ay[i] -= push_coefficient/np.power((dist[i][j]), push_power) * np.sin(atan)
 
-        for e in range(0, number, 1):
-            moveturtles(e, x[e],y[e])
+        moveturtles(i, x[i],y[i])
 
         vx[i] += ax[i] * dt
         vy[i] += ay[i] * dt
