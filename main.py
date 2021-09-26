@@ -32,6 +32,20 @@ ay = []
 x_border = 350
 y_border = 250
 maxspeed = 10
+dd = 10 #Параметр для рисования границы
+
+def drawborder():
+    turtle.color('black')
+    turtle.goto(x_border + dd, y_border + dd)
+    turtle.pendown()
+    turtle.goto(x_border + dd, -1 * y_border - dd)
+    turtle.goto(-1 * x_border - dd, -1 * y_border - dd)
+    turtle.goto(-1 * x_border - dd, y_border + dd)
+    turtle.goto(x_border + dd, y_border + dd)
+    turtle.penup()
+    turtle.hideturtle()
+
+drawborder()
 
 for i in range(0, number, 1):
     x.append(randint(-1 * x_border, x_border))
